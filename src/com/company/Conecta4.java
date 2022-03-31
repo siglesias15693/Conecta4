@@ -13,7 +13,7 @@ public class Conecta4 {
     public static void mostrarTablero(String[][] tabla) {
         System.out.print("         ");
         for (int i = 0; i < Columnas; i++) {
-            System.out.print("____");
+            System.out.print("___ ");
         }System.out.println("");
 
         for (int i = 0; i < Filas; i++) {
@@ -35,62 +35,74 @@ public class Conecta4 {
             }
         }
         System.out.print("         ");
-        for (int i = 1; i < Columnas + 1; i += 1) {
+        for (int i = 1; i < Columnas + 1; i++) {
             System.out.print("¯¯¯ ");
         }
-        System.out.println("");
+        System.out.println();
 
         System.out.print("          ");
-        for (int i = 1; i < Columnas + 1; i += 1) {
+        for (int i = 1; i < Columnas + 1; i++) {
             System.out.print(i + "   ");
         }System.out.println();
     }
 
     public static void mostrarInterfazTablero(String jugador1, String caracter1, String jugador2, String caracter2, int jugadasMaximas) {
         System.out.println("=================================================================");
-        System.out.println(jugador1 + " : " + caracter1 + "      " + jugador2 + " : " + caracter2);
+        System.out.println(jugador1 + ": " + caracter1 + "      " + jugador2 + ": " + caracter2);
         System.out.print("==============================================||| JUGADA N°" + jugadasMaximas + " |||");
     }
 
     public static void verificadorGanador(String auxiliarJugador, String auxilarCaracter) {
         //verificacion ganador (horizontal)
-        for (int i = 1; i < Filas; i += 1) {
-            for (int j = 0; j < Columnas - 3; j += 1) {
-                if (tablero[i][j].equals(auxilarCaracter) && tablero[i][j + 1].equals(auxilarCaracter) && tablero[i][j + 2].equals(auxilarCaracter) && tablero[i][j + 3].equals(auxilarCaracter)) {
+        for (int i = 1; i < Filas; i++) {
+            for (int j = 0; j < Columnas - 3; j++) {
+                if (tablero[j][i].equals(auxilarCaracter) &&
+                        tablero[j+1][i].equals(auxilarCaracter) &&
+                        tablero[j+2][i].equals(auxilarCaracter) &&
+                        tablero[j+3][i].equals(auxilarCaracter)
+                ) {
                     finJuego = true;
                     mostrarTablero(tablero);
-                    System.out.println("HA GANADO: " + auxiliarJugador + " CONECTO 4 \033[35mHORIZONTALMENTE!!!\u001B[0m");
+                    System.out.println("HA GANADO: " + auxiliarJugador);
                 }
             }
         }
 
         //verificacion ganador (vertical)
-        for (int i = 0; i < Filas; i += 1) {
-            for (int j = 0; j < Columnas - 3; j += 1) {
-                if (tablero[j][i].equals(auxilarCaracter) && tablero[j + 1][i].equals(auxilarCaracter) && tablero[j + 2][i].equals(auxilarCaracter) && tablero[j + 3][i].equals(auxilarCaracter)) {
+        for (int i = 0; i < Filas- 3 ; i++) {
+            for (int j = 0; j <  Columnas; j++) {
+                if (tablero[j][i].equals(auxilarCaracter) &&
+                        tablero[j][i+1].equals(auxilarCaracter) &&
+                        tablero[j][i+2].equals(auxilarCaracter) &&
+                        tablero[j][i+3].equals(auxilarCaracter)
+                ) {
                     finJuego = true;
                     mostrarTablero(tablero);
-                    System.out.println("HA GANADO: " + auxiliarJugador + " CONECTO 4 \033[35mVERTICALMENTE!!!\u001B[0m");
+                    System.out.println("HA GANADO: " + auxiliarJugador);
                 }
             }
         }
 
         //verificacion ganador (diagonal)
-        for (int i = 0; i < Columnas - 4 + 1; i += 1) {
-            for (int j = 0; j < Filas - 4 + 1; j += 1) {
+        for (int i = 0; i < Filas - 3; i++) {
+            for (int j = 0; j < Columnas - 3; j++) {
                 if (tablero[j][i].equals(auxilarCaracter) && tablero[j + 1][i + 1].equals(auxilarCaracter) && tablero[j + 2][i + 2].equals(auxilarCaracter) && tablero[j + 3][i + 3].equals(auxilarCaracter)) {
                     finJuego = true;
                     mostrarTablero(tablero);
-                    System.out.println("HA GANADO: " + auxiliarJugador + " CONECTO 4 \033[35mDIAGONALMENTE!!!\u001B[0m");
+                    System.out.println("HA GANADO: " + auxiliarJugador);
                 }
             }
         }
-        for (int i = Filas; i > 3; i -= 1) {
-            for (int j = 0; j < Columnas - 3; j += 1) {
-                if (tablero[j][i - 1].equals(auxilarCaracter) && tablero[j + 1][i - 2].equals(auxilarCaracter) && tablero[j + 2][i - 3].equals(auxilarCaracter) && tablero[j + 3][i - 4].equals(auxilarCaracter)) {
+        for (int i = 0; i < Filas - 3; i++) {
+            for (int j = Columnas-1;j>=3 ; j--) {
+                if (tablero[j][i].equals(auxilarCaracter) &&
+                        tablero[j-1][i+1].equals(auxilarCaracter) &&
+                        tablero[j-2][i+2].equals(auxilarCaracter) &&
+                        tablero[j-3][i+3].equals(auxilarCaracter)
+                ) {
                     finJuego = true;
                     mostrarTablero(tablero);
-                    System.out.println("HA GANADO: " + auxiliarJugador + " CONECTO 4 \033[35mDIAGONALMENTE!!!\u001B[0m");
+                    System.out.println("HA GANADO: " + auxiliarJugador);
                 }
             }
         }
@@ -120,7 +132,7 @@ public class Conecta4 {
 
 
         //aplico color azul al nombre y caracter del jugador 1
-        jugador1 = "\033[32m" + "Jugador 1" + "\u001B[0m";
+        jugador1 = "\033[32m" + "Jugador" + "\u001B[0m";
         caracter1 = "\033[31m" + "O" + "\u001B[0m";
 
         jugador2 = "\033[33mComputadorNoob\u001B[0m";
@@ -138,7 +150,6 @@ public class Conecta4 {
                     System.out.println(jugador1 + " escriba el numero de columna para poner su ficha:");
                     String auxiliar = lector.nextLine();
                     columna = Integer.parseInt(auxiliar);
-                    System.out.println(columna+" "+Columnas);
                     if (columna > Columnas || columna < 1) {
                         mensajeError = "\n\033[35m**ERROR:\u001B[0m Debe ingresar un numero entre el 1 al " + Columnas;
                     } else {
