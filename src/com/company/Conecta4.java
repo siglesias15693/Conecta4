@@ -18,7 +18,6 @@ public class Conecta4 {
     private static String caracter2;
 
     private static boolean verificador;
-    private static boolean verificador2;
     private static String mensajeError= "";
 
 
@@ -149,8 +148,7 @@ public class Conecta4 {
             mensajeError = "";
 
             System.out.println(jugador + " escriba el numero de columna para poner su ficha:");
-            String auxiliar = lector.nextLine();
-            columna = Integer.parseInt(auxiliar);
+            columna = lector.nextInt();
             if (columna > Columnas || columna < 1) {
                 mensajeError = "\n\033[35m**ERROR:\u001B[0m Debe ingresar un numero entre 1 y " + Columnas;
             } else {
@@ -204,7 +202,6 @@ public class Conecta4 {
     public static void juego(){
         while (running){
             //Turnos de los jugadores
-            //if (running){Player(jugador1,caracter1);}
 
             if (N_Jugadores==0){
                 if (running){Bot(jugador1,caracter1);}
