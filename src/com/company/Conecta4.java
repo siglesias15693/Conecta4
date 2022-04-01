@@ -76,7 +76,6 @@ public class Conecta4 {
                         tablero[j+3][i].equals(caracter)
                 ) {
                     finJuego = true;
-                    mostrarTablero(tablero);
                     System.out.println("HA GANADO: " + jugador);
                 }
             }
@@ -91,7 +90,6 @@ public class Conecta4 {
                         tablero[j][i+3].equals(caracter)
                 ) {
                     finJuego = true;
-                    mostrarTablero(tablero);
                     System.out.println("HA GANADO: " + jugador);
                 }
             }
@@ -106,7 +104,6 @@ public class Conecta4 {
                         tablero[j + 3][i + 3].equals(caracter)
                 ) {
                     finJuego = true;
-                    mostrarTablero(tablero);
                     System.out.println("HA GANADO: " + jugador);
                 }
             }
@@ -119,7 +116,6 @@ public class Conecta4 {
                         tablero[j-3][i+3].equals(caracter)
                 ) {
                     finJuego = true;
-                    mostrarTablero(tablero);
                     System.out.println("HA GANADO: " + jugador);
                 }
             }
@@ -143,6 +139,9 @@ public class Conecta4 {
         int columna;
         int contador=0;
 
+        //llamo a la funcion "mostrarTablero"
+        mostrarTablero(tablero);
+
         //turno jugador
         while (!verificador) {
             System.out.println(mensajeError);
@@ -152,7 +151,7 @@ public class Conecta4 {
             String auxiliar = lector.nextLine();
             columna = Integer.parseInt(auxiliar);
             if (columna > Columnas || columna < 1) {
-                mensajeError = "\n\033[35m**ERROR:\u001B[0m Debe ingresar un numero entre el 1 al " + Columnas;
+                mensajeError = "\n\033[35m**ERROR:\u001B[0m Debe ingresar un numero entre 1 y " + Columnas;
             } else {
                 columna-=1;
                 for (int i = Filas - 1; i >=0; i--) {
@@ -209,9 +208,6 @@ public class Conecta4 {
 
     public static void juego(){
         while (!finJuego){
-            //llamo a la funcion "mostrarTablero"
-            mostrarTablero(tablero);
-
             //Turnos de los jugadores
             if (N_Jugadores==1){
                 Player(jugador1,caracter1);
@@ -225,7 +221,7 @@ public class Conecta4 {
 
     public static void main(String[] args) {
         //Inicializar
-        N_Jugadores=1;
+        N_Jugadores=2;
 
         jugador1 = "\033[32m" + "Jugador1" + "\u001B[0m";
         caracter1 = "\033[31m" + "O" + "\u001B[0m";
@@ -236,7 +232,7 @@ public class Conecta4 {
         verificador = false;
         verificador2 = false;
 
-        tablero= new String[9][7];
+        tablero= new String[10][7];
         Columnas = tablero.length;
         Filas = tablero[0].length;
         jugadasMaximas = 0;
