@@ -223,11 +223,11 @@ public class Conecta4 {
         //Inicializar
         N_Jugadores=2;
 
-        jugador1 = "\033[32m" + "Jugador1" + "\u001B[0m";
+        jugador1 = "\033[31m" + "Jugador1" + "\u001B[0m";
         caracter1 = "\033[31m" + "O" + "\u001B[0m";
 
-        jugador2 = "\033[33m"+"Jugador2"+"\u001B[0m";
-        caracter2 = "\033[33mX\u001B[0m";
+        jugador2 = "\033[34m"+"Jugador2"+"\u001B[0m";
+        caracter2 = "\033[34mX\u001B[0m";
 
         verificador = false;
         verificador2 = false;
