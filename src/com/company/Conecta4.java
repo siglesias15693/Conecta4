@@ -60,10 +60,11 @@ public class Conecta4 {
             System.out.print(i + "   ");
         }System.out.println();
 
-
-        System.out.println("=================================================================");
-        System.out.println(jugador1 + ": " + caracter1 + "      " + jugador2 + ": " + caracter2);
-        System.out.print("===============================================||| JUGADA N°" + jugadasMaximas + " |||");
+        if (running) {
+            System.out.println("=================================================================");
+            System.out.println(jugador1 + ": " + caracter1 + "      " + jugador2 + ": " + caracter2);
+            System.out.print("===============================================||| JUGADA N°" + jugadasMaximas + " |||");
+        }
     }
 
     public static void verificadorGanador(String jugador, String caracter) {
@@ -155,11 +156,10 @@ public class Conecta4 {
             } else {
                 columna--;
                 for (int i = Filas - 1; i >=0; i--) {
-                    if (!verificador2) {
+                    if (!verificador) {
                         //Si se cumple esta condicion, termina el turno del jugador 1
                         if (!tablero[columna][i].equals(caracter1) && !tablero[columna][i].equals(caracter2)) {
                             tablero[columna][i] = caracter;
-                            verificador2 = true;
                             verificador = true;
                             jugadasMaximas++;
                         } else {
@@ -173,7 +173,6 @@ public class Conecta4 {
             }
 
         }
-        verificador2 = false;
         verificador = false;
         //llamo a la funcion "verificarGanador"
         verificadorGanador(jugador, caracter);
@@ -186,18 +185,16 @@ public class Conecta4 {
             //Columna random
             int columna = (int) (Math.random() * Columnas);
             for (int i = Filas - 1; i > -1; i--) {
-                if (!verificador2) {
+                if (!verificador) {
                     //Verficar csilla libre
                     if (!tablero[columna][i].equals(caracter2) && !tablero[columna][i].equals(caracter1)) {
                         tablero[columna][i] = caracter;
-                        verificador2 = true;
                         verificador = true;
                         jugadasMaximas++;
                     }
                 }
             }
         }
-        verificador2 = false;
         verificador = false;
         //llamo a la funcion "verificarGanador"
         verificadorGanador(bot, caracter);
@@ -207,19 +204,27 @@ public class Conecta4 {
     public static void juego(){
         while (running){
             //Turnos de los jugadores
-            if (running){Player(jugador1,caracter1);}
+            //if (running){Player(jugador1,caracter1);}
 
-            if (N_Jugadores==1){
+            if (N_Jugadores==0){
+                if (running){Bot(jugador1,caracter1);}
                 if (running){Bot(jugador2,caracter2);}
-            }else{
+            }
+            if (N_Jugadores==1){
+                if (running){Player(jugador1,caracter1);}
+                if (running){Bot(jugador2,caracter2);}
+            }
+            if (N_Jugadores==2){
+                if (running){Player(jugador1,caracter1);}
                 if (running){Player(jugador2,caracter2);}
             }
         }
+        mostrarTablero(tablero);
     }
 
     public static void main(String[] args) {
         //Inicializar
-        N_Jugadores=2;
+        N_Jugadores=1;
 
         jugador1 = "\033[31m" + "Jugador1" + "\u001B[0m";
         caracter1 = "\033[31m" + "O" + "\u001B[0m";
@@ -228,7 +233,6 @@ public class Conecta4 {
         caracter2 = "\033[34mX\u001B[0m";
 
         verificador = false;
-        verificador2 = false;
 
         tablero= new String[7][7];
         Columnas = tablero.length;
