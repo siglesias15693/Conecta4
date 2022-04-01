@@ -164,10 +164,10 @@ public class Conecta4 {
                             jugadasMaximas++;
                         } else {
                             contador++;
+                            if (contador>=Filas) {
+                                mensajeError = "\n\033[35m**ERROR:\u001B[0m Esta columna esta completa, escoja otra";
+                            }
                         }
-                    }
-                    if (contador>=Filas) {
-                        mensajeError = "\n\033[35m**ERROR:\u001B[0m Esta columna esta completa, escoja otra";
                     }
                 }
             }
@@ -177,8 +177,6 @@ public class Conecta4 {
         verificador = false;
         //llamo a la funcion "verificarGanador"
         verificadorGanador(jugador, caracter);
-
-
     }
 
     public static void Bot(String bot, String caracter){
