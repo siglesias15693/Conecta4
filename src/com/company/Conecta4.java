@@ -125,7 +125,7 @@ public class Conecta4 {
     }
 
     public static void verificadorEmpate(){
-        if (jugadasMaximas > (Filas * Columnas)) {
+        if (jugadasMaximas >= (Filas * Columnas)) {
             finJuego = true;
             mostrarTablero(tablero);
             System.out.println("======================");
@@ -137,13 +137,13 @@ public class Conecta4 {
 
     public static void Player(String jugador,String caracter){
         int columna;
-        int contador=0;
 
         //llamo a la funcion "mostrarTablero"
         mostrarTablero(tablero);
 
         //turno jugador
         while (!verificador) {
+            int contador=0;
             System.out.println(mensajeError);
             mensajeError = "";
 
@@ -153,7 +153,7 @@ public class Conecta4 {
             if (columna > Columnas || columna < 1) {
                 mensajeError = "\n\033[35m**ERROR:\u001B[0m Debe ingresar un numero entre 1 y " + Columnas;
             } else {
-                columna-=1;
+                columna--;
                 for (int i = Filas - 1; i >=0; i--) {
                     if (!verificador2) {
                         //Si se cumple esta condicion, termina el turno del jugador 1
@@ -166,7 +166,7 @@ public class Conecta4 {
                             contador++;
                         }
                     }
-                    if (contador>Filas) {
+                    if (contador>=Filas) {
                         mensajeError = "\n\033[35m**ERROR:\u001B[0m Esta columna esta completa, escoja otra";
                     }
                 }
@@ -210,11 +210,11 @@ public class Conecta4 {
         while (!finJuego){
             //Turnos de los jugadores
             if (N_Jugadores==1){
-                Player(jugador1,caracter1);
-                Bot(jugador2,caracter2);
+                if (!finJuego){Player(jugador1,caracter1);}
+                if (!finJuego){Bot(jugador2,caracter2);}
             }else{
-                Player(jugador1,caracter1);
-                Player(jugador2,caracter2);
+                if (!finJuego){Player(jugador1,caracter1);}
+                if (!finJuego){Player(jugador2,caracter2);}
             }
         }
     }
@@ -232,7 +232,7 @@ public class Conecta4 {
         verificador = false;
         verificador2 = false;
 
-        tablero= new String[10][7];
+        tablero= new String[7][7];
         Columnas = tablero.length;
         Filas = tablero[0].length;
         jugadasMaximas = 0;
