@@ -19,7 +19,7 @@ public class Conecta4 {
 
     private static boolean verificador;
     private static boolean verificador2;
-    private static String mensajeError= "";;
+    private static String mensajeError= "";
 
 
     private static Scanner lector = new Scanner(System.in);
@@ -29,7 +29,7 @@ public class Conecta4 {
         System.out.print("         ");
         for (int i = 0; i < Columnas; i++) {
             System.out.print("___ ");
-        }System.out.println("");
+        }System.out.println();
 
         for (int i = 0; i < Filas; i++) {
             System.out.print("        | ");
