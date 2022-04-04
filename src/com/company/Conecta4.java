@@ -24,7 +24,7 @@ public class Conecta4 {
     private static final Scanner lector = new Scanner(System.in);
 
 
-    public static void mostrarTablero(String[][] tabla) {
+    public static void mostrarTablero() {
         System.out.print("         ");
         for (int i = 0; i < Columnas; i++) {
             System.out.print("___ ");
@@ -33,7 +33,7 @@ public class Conecta4 {
         for (int i = 0; i < Filas; i++) {
             System.out.print("        | ");
             for (int j = 0; j < Columnas; j++) {
-                System.out.print(tabla[j][i]+" | ");
+                System.out.print(tablero[j][i]+" | ");
             }
             System.out.println();
             if (i < Filas -1) {
@@ -127,7 +127,7 @@ public class Conecta4 {
     public static void verificadorEmpate(){
         if (jugadasMaximas >= (Filas * Columnas)) {
             running = false;
-            mostrarTablero(tablero);
+            mostrarTablero();
             System.out.println("======================");
             System.out.println("\033[35m¡¡¡EMPATE!!!\u001B[0m");
             System.out.println("El tablero esta lleno");
@@ -139,7 +139,7 @@ public class Conecta4 {
         int columna;
 
         //llamo a la funcion "mostrarTablero"
-        mostrarTablero(tablero);
+        mostrarTablero();
 
         //turno jugador
         while (!verificador) {
@@ -216,7 +216,7 @@ public class Conecta4 {
                 if (running){Player(jugador2,caracter2);}
             }
         }
-        mostrarTablero(tablero);
+        mostrarTablero();
     }
 
     public static void main(String[] args) {
