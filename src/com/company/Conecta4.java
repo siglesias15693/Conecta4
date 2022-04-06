@@ -124,7 +124,7 @@ public class Conecta4 {
                 }
             }
         }
-        System.out.print(mssg);
+        System.out.println(mssg);
         verificadorEmpate();
     }
 
