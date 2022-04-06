@@ -80,6 +80,7 @@ public class Conecta4 {
                 ) {
                     running = false;
                     System.out.println("HA GANADO: " + jugador);
+                    break;
                 }
             }
         }
@@ -94,6 +95,7 @@ public class Conecta4 {
                 ) {
                     running = false;
                     System.out.println("HA GANADO: " + jugador);
+                    break;
                 }
             }
         }
@@ -108,6 +110,7 @@ public class Conecta4 {
                 ) {
                     running = false;
                     System.out.println("HA GANADO: " + jugador);
+                    break;
                 }
             }
         }
@@ -120,6 +123,7 @@ public class Conecta4 {
                 ) {
                     running = false;
                     System.out.println("HA GANADO: " + jugador);
+                    break;
                 }
             }
         }
@@ -138,8 +142,35 @@ public class Conecta4 {
         }
     }
 
+    public static boolean colocarFicha(int columna,char caracter) {
+        int contador = 0;
+
+        if (columna > Columnas || columna < 1) {
+            mensajeError = "\n\033[35m**ERROR:\u001B[0m Debe ingresar un numero entre 1 y " + Columnas;
+            return false;
+        } else {
+            columna--;
+            for (int i = Filas - 1; i >= 0; i--) {
+
+                //Si se cumple esta condicion, termina el turno del jugador 1
+                if (!tablero[columna][i].equals(Character.toString(simbol[0])) && !tablero[columna][i].equals(Character.toString(simbol[1]))) {
+                    tablero[columna][i] = Character.toString(caracter);
+                    turno++;
+                    return true;
+                } else {
+                    contador++;
+                    if (contador >= Filas) {
+                        mensajeError = "\n\033[35m**ERROR:\u001B[0m Esta columna esta completa, escoja otra";
+                        return false;
+                    }
+                }
+
+            }
+        }
+        return false;
+    }
+
     public static void Player(String jugador, char caracter){
-        int columna;
         boolean verificador=true;
 
         //llamo a la funcion "mostrarTablero"
@@ -147,55 +178,29 @@ public class Conecta4 {
 
         //turno jugador
         while (verificador) {
-            int contador=0;
             System.out.println(mensajeError);
             mensajeError = "";
 
             System.out.println(jugador + " escriba el numero de columna para poner su ficha:");
-            columna = lector.nextInt();
-            if (columna > Columnas || columna < 1) {
-                mensajeError = "\n\033[35m**ERROR:\u001B[0m Debe ingresar un numero entre 1 y " + Columnas;
-            } else {
-                columna--;
-                for (int i = Filas - 1; i >=0; i--) {
-                    if (verificador) {
-                        //Si se cumple esta condicion, termina el turno del jugador 1
-                        if (!tablero[columna][i].equals(Character.toString(simbol[0])) && !tablero[columna][i].equals(Character.toString(simbol[1]))) {
-                            tablero[columna][i]= Character.toString(caracter);
-                            verificador = false;
-                            turno++;
-                        } else {
-                            contador++;
-                            if (contador>=Filas) {
-                                mensajeError = "\n\033[35m**ERROR:\u001B[0m Esta columna esta completa, escoja otra";
-                            }
-                        }
-                    }
-                }
-            }
+            int columna = lector.nextInt();
 
+            verificador=!colocarFicha(columna,caracter);
         }
+
         //llamo a la funcion "verificarGanador"
         verificadorGanador(jugador, caracter);
     }
 
     public static void Bot(String bot, char caracter){
         boolean verificador=true;
+
         //turno del Bot
         while (verificador) {
             //Columna random
             int columna = (int) (Math.random() * Columnas);
-            for (int i = Filas - 1; i > -1; i--) {
-                if (verificador) {
-                    //Verficar casilla libre
-                    if (!tablero[columna][i].equals(Character.toString(simbol[0])) && !tablero[columna][i].equals(Character.toString(simbol[1]))) {
-                        tablero[columna][i] = Character.toString(caracter);
-                        verificador = false;
-                        turno++;
-                    }
-                }
-            }
+            verificador=!colocarFicha(columna,caracter);
         }
+
         //llamo a la funcion "verificarGanador"
         verificadorGanador(bot, caracter);
 
