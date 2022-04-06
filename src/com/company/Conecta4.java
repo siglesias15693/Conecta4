@@ -65,7 +65,7 @@ public class Conecta4 {
         if (running) {
             System.out.println("=================================================================");
             System.out.println(jugador[0] + ": " + simbol[0] + "      " + jugador[1] + ": " + simbol[1]);
-            System.out.print("===============================================||| TURNO N°" + turno + " |||");
+            System.out.println("===============================================||| TURNO N°" + turno + " |||");
         }
     }
 
@@ -173,48 +173,35 @@ public class Conecta4 {
     public static void Player(String jugador, char caracter){
         boolean verificador=true;
 
-        //llamo a la funcion "mostrarTablero"
-        mostrarTablero();
-
         //turno jugador
         while (verificador) {
-            System.out.println(mensajeError);
-            mensajeError = "";
+            //diferenciar bot y jugador
+            if (auto[turno%2]){
+                //Columna random
+                int columna = (int) (Math.random() * Columnas);
+                verificador=!colocarFicha(columna,caracter);
+            }else{
+                //llamo a la funcion "mostrarTablero"
+                mostrarTablero();
+                System.out.println(mensajeError);
+                mensajeError = "";
 
-            System.out.println(jugador + " escriba el numero de columna para poner su ficha:");
-            int columna = lector.nextInt();
+                //introducir valor
+                System.out.println(jugador + " escriba el numero de columna para poner su ficha:");
+                int columna = lector.nextInt();
 
-            verificador=!colocarFicha(columna,caracter);
+                verificador=!colocarFicha(columna,caracter);
+            }
+
         }
 
         //llamo a la funcion "verificarGanador"
         verificadorGanador(jugador, caracter);
     }
 
-    public static void Bot(String bot, char caracter){
-        boolean verificador=true;
-
-        //turno del Bot
-        while (verificador) {
-            //Columna random
-            int columna = (int) (Math.random() * Columnas);
-            verificador=!colocarFicha(columna,caracter);
-        }
-
-        //llamo a la funcion "verificarGanador"
-        verificadorGanador(bot, caracter);
-
-    }
-
     public static void juego(){
         while (running){
-            //Turnos de los jugadores
-
-            if (auto[turno%2]){
-                Bot(jugador[turno%2],simbol[turno%2]);
-            }else{
-                Player(jugador[turno%2],simbol[turno%2]);
-            }
+            Player(jugador[turno%2],simbol[turno%2]);
         }
         mostrarTablero();
     }
@@ -224,7 +211,7 @@ public class Conecta4 {
 
         jugador = new String[]{"\033[31mJugador1\u001B[0m", "\033[34mJugador2\u001B[0m"};
         simbol= new char[]{'X','O'};
-        auto = new boolean[]{true,true};
+        auto = new boolean[]{false,false};
 
         tablero= new String[7][7];
         Columnas = tablero.length;
