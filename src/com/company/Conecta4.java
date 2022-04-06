@@ -70,6 +70,7 @@ public class Conecta4 {
     }
 
     public static void verificadorGanador(String jugador, char caracter) {
+        String mssg="";
         //verificacion (horizontal)
         for (int i = 1; i < Filas; i++) {
             for (int j = 0; j < Columnas - 3; j++) {
@@ -79,8 +80,7 @@ public class Conecta4 {
                         tablero[j+3][i].equals(Character.toString(caracter))
                 ) {
                     running = false;
-                    System.out.println("HA GANADO: " + jugador);
-                    break;
+                    mssg=("HA GANADO: " + jugador);
                 }
             }
         }
@@ -94,8 +94,7 @@ public class Conecta4 {
                         tablero[j][i+3].equals(Character.toString(caracter))
                 ) {
                     running = false;
-                    System.out.println("HA GANADO: " + jugador);
-                    break;
+                    mssg=("HA GANADO: " + jugador);
                 }
             }
         }
@@ -109,8 +108,7 @@ public class Conecta4 {
                         tablero[j + 3][i + 3].equals(Character.toString(caracter))
                 ) {
                     running = false;
-                    System.out.println("HA GANADO: " + jugador);
-                    break;
+                    mssg=("HA GANADO: " + jugador);
                 }
             }
         }
@@ -122,12 +120,11 @@ public class Conecta4 {
                         tablero[j-3][i+3].equals(Character.toString(caracter))
                 ) {
                     running = false;
-                    System.out.println("HA GANADO: " + jugador);
-                    break;
+                    mssg=("HA GANADO: " + jugador);
                 }
             }
         }
-
+        System.out.print(mssg);
         verificadorEmpate();
     }
 
@@ -211,7 +208,7 @@ public class Conecta4 {
 
         jugador = new String[]{"\033[31mJugador1\u001B[0m", "\033[34mJugador2\u001B[0m"};
         simbol= new char[]{'X','O'};
-        auto = new boolean[]{false,false};
+        auto = new boolean[]{true,true};
 
         tablero= new String[7][7];
         Columnas = tablero.length;
