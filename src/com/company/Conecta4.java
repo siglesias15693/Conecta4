@@ -172,23 +172,33 @@ public class Conecta4 {
 
         //turno jugador
         while (verificador) {
-            //diferenciar bot y jugador
-            if (auto[turno%2]){
-                //Columna random
-                int columna = (int) (Math.random() * Columnas);
-                verificador=!colocarFicha(columna,caracter);
-            }else{
-                //llamo a la funcion "mostrarTablero"
-                mostrarTablero();
-                System.out.println(mensajeError);
-                mensajeError = "";
 
-                //introducir valor
-                System.out.println(jugador + " escriba el numero de columna para poner su ficha:");
-                int columna = lector.nextInt();
+            //llamo a la funcion "mostrarTablero"
+            mostrarTablero();
+            System.out.println(mensajeError);
+            mensajeError = "";
 
-                verificador=!colocarFicha(columna,caracter);
-            }
+            //introducir valor
+            System.out.println(jugador + " escriba el numero de columna para poner su ficha:");
+            int columna = lector.nextInt();
+
+            verificador=!colocarFicha(columna,caracter);
+
+        }
+
+        //llamo a la funcion "verificarGanador"
+        verificadorGanador(jugador, caracter);
+    }
+
+    public static void Bot(String jugador, char caracter){
+        boolean verificador=true;
+
+        //turno jugador
+        while (verificador) {
+
+            //Columna random
+            int columna = (int) (Math.random() * Columnas);
+            verificador=!colocarFicha(columna,caracter);
 
         }
 
@@ -198,7 +208,13 @@ public class Conecta4 {
 
     public static void juego(){
         while (running){
-            Player(jugador[turno%2],simbol[turno%2]);
+
+            if (auto[turno%2]){
+                Player(jugador[turno%2],simbol[turno%2]);
+            }else{
+                Bot(jugador[turno%2],simbol[turno%2]);
+            }
+
         }
         mostrarTablero();
     }
