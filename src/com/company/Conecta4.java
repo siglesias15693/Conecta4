@@ -142,14 +142,13 @@ public class Conecta4 {
     public static boolean colocarFicha(int columna,char caracter) {
         int contador = 0;
 
-        if (columna > Columnas || columna < 1) {
+        if (columna >= Columnas || columna < 0) {
             mensajeError = "\n\033[35m**ERROR:\u001B[0m Debe ingresar un numero entre 1 y " + Columnas;
             return false;
         } else {
-            columna--;
             for (int i = Filas - 1; i >= 0; i--) {
 
-                //Si se cumple esta condicion, termina el turno del jugador 1
+                //Si se cumple esta condicion, termina el turno
                 if (!tablero[columna][i].equals(Character.toString(simbol[0])) && !tablero[columna][i].equals(Character.toString(simbol[1]))) {
                     tablero[columna][i] = Character.toString(caracter);
                     turno++;
@@ -181,9 +180,9 @@ public class Conecta4 {
             //introducir valor
             System.out.println(jugador + " escriba el numero de columna para poner su ficha:");
             int columna = lector.nextInt();
+            columna--;
 
             verificador=!colocarFicha(columna,caracter);
-
         }
 
         //llamo a la funcion "verificarGanador"
@@ -198,21 +197,71 @@ public class Conecta4 {
 
             //Columna random
             int columna = (int) (Math.random() * Columnas);
-            verificador=!colocarFicha(columna,caracter);
 
+            columna=IA(columna);
+
+            verificador=!colocarFicha(columna,caracter);
         }
 
         //llamo a la funcion "verificarGanador"
         verificadorGanador(jugador, caracter);
     }
 
+    public static int IA(int x){
+        for (int i=0;i<Columnas;i++){
+            boolean verificador=true;
+            for (int j=Filas-1;j>=0 && verificador;j--){
+                if (tablero[i][j].equals(" ")){
+                    if (comprovarIA(i,j,simbol[turno%2])){
+                        return i;
+                    }
+
+                    if (comprovarIA(i,j,simbol[1-(turno%2)])){
+                        return i;
+                    }
+                    verificador=false;
+                }
+            }
+        }
+
+        return x;
+    }
+
+    public static boolean comprovarIA(int x,int y, char caracter){
+
+        if(y+2<Filas){
+            if (tablero[x][y+1].equals(Character.toString(caracter)) && tablero[x][y+2].equals(Character.toString(caracter))){return true;}
+        }
+
+        if(x-1>=0 && x+1<Columnas){
+            if (tablero[x-1][y].equals(Character.toString(caracter)) && tablero[x+1][y].equals(Character.toString(caracter))){return true;}
+
+            if(x-2>=0 && x+2<Columnas){
+                if (tablero[x-2][y].equals(Character.toString(caracter)) && tablero[x-1][y].equals(Character.toString(caracter))){return true;}
+
+                if (tablero[x+2][y].equals(Character.toString(caracter)) && tablero[x+1][y].equals(Character.toString(caracter))){return true;}
+            }else{
+                if(x+3<Columnas){
+                    if (tablero[x+3][y].equals(Character.toString(caracter)) && tablero[x+2][y].equals(Character.toString(caracter)) && tablero[x+1][y].equals(Character.toString(caracter))){return true;}
+                }
+
+                if(x-3>=0){
+                    if (tablero[x-3][y].equals(Character.toString(caracter)) && tablero[x-2][y].equals(Character.toString(caracter)) && tablero[x-1][y].equals(Character.toString(caracter))){return true;}
+                }
+            }
+        }
+
+
+        return false;
+    }
+
     public static void juego(){
         while (running){
 
             if (auto[turno%2]){
-                Player(jugador[turno%2],simbol[turno%2]);
-            }else{
                 Bot(jugador[turno%2],simbol[turno%2]);
+            }else{
+                Player(jugador[turno%2],simbol[turno%2]);
             }
 
         }
@@ -224,7 +273,7 @@ public class Conecta4 {
 
         jugador = new String[]{"\033[31mJugador1\u001B[0m", "\033[34mJugador2\u001B[0m"};
         simbol= new char[]{'X','O'};
-        auto = new boolean[]{true,true};
+        auto = new boolean[]{false,true};
 
         tablero= new String[7][7];
         Columnas = tablero.length;
