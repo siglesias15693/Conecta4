@@ -238,7 +238,6 @@ public class Conecta4 {
 
             if(x-2>=0 && x+2<Columnas){
                 if (tablero[x-2][y].equals(Character.toString(caracter)) && tablero[x-1][y].equals(Character.toString(caracter))){return true;}
-
                 if (tablero[x+2][y].equals(Character.toString(caracter)) && tablero[x+1][y].equals(Character.toString(caracter))){return true;}
             }else{
                 if(x+3<Columnas){
