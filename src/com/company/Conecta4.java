@@ -27,16 +27,16 @@ public class Conecta4 {
         }System.out.println();
 
         for (int i = 0; i < Filas; i++) {
-            System.out.print("        | ");
+            System.out.print("        |");
             for (int j = 0; j < Columnas; j++) {
                 if (tablero[j][i].equals(Character.toString(simbol[0]))){
-                    System.out.print("\033[31m"+tablero[j][i]+"\u001B[0m");
+                    System.out.print("\033[41m "+tablero[j][i]+" \u001B[0m");
                 }else if (tablero[j][i].equals(Character.toString(simbol[1]))){
-                    System.out.print("\033[34m"+tablero[j][i]+"\u001B[0m");
+                    System.out.print("\033[44m "+tablero[j][i]+" \u001B[0m");
                 }else{
                     System.out.print(tablero[j][i]);
                 }
-                System.out.print(" | ");
+                System.out.print("|");
             }
             System.out.println();
             if (i < Filas -1) {
@@ -282,7 +282,7 @@ public class Conecta4 {
         //Se asigna un caracter por defecto al tablero
         for (int i = 0; i <= Columnas - 1; i++) {
             for (int j = 0; j <= Filas - 1; j++) {
-                tablero[i][j] = " ";
+                tablero[i][j] = "   ";
             }
         }
 
